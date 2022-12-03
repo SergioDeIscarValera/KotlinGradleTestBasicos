@@ -26,22 +26,22 @@ class carrito_test {
 
     @Test
     fun  addProducto_Test(){
-        val carritoEmpty: Array<Array<Any>> = Array(10){ arrayOf("", 0.0, 0, 0.0, 0 ,0.0) }
+        val carritoEmpty: Array<Array<Any>> = Array(10){ arrayOf("", 0.0, 0, 0.0, 0, 0.0) }
 
-        val carritoCase: Array<Array<Any>> = Array(10){ arrayOf("", 0, 0, 0, 0, 0) }
+        val carritoCase: Array<Array<Any>> = Array(10){ arrayOf("", 0.0, 0, 0.0, 0, 0.0) }
         carritoCase[0] = arrayOf("Lapiz", 0.25, 5, 1.25, 0, 1.25)
         carritoCase[1] = arrayOf("Manzana", 1.0, 3, 3.0, 1, 3.3)
         carritoCase[2] = arrayOf("Ratón", 2.5, 1, 2.5, 2, 3.03)
 
         assertAll(
             { assertTrue(addProducto(carritoEmpty, "Lapiz", 5)) },   // Primero lo añado
-            { assertContentEquals(carritoCase[0],carritoEmpty[0]) },                   // Y luego miro si se a añadido bien
+            { assertContentEquals(carritoCase[0],carritoEmpty[0]) },                // Y luego miro si se a añadido bien
 
             { assertTrue(addProducto(carritoEmpty, "Manzana", 3)) }, // Primero lo añado
-            { assertContentEquals(carritoCase[1],carritoEmpty[1]) },                   // Y luego miro si se a añadido bien
+            { assertContentEquals(carritoCase[1],carritoEmpty[1]) },                // Y luego miro si se a añadido bien
 
             { assertTrue(addProducto(carritoEmpty, "Ratón", 1)) },   // Primero lo añado
-            { assertContentEquals(carritoCase[2],carritoEmpty[2]) },                   // Y luego miro si se a añadido bien
+            { assertContentEquals(carritoCase[2],carritoEmpty[2]) },                // Y luego miro si se a añadido bien
 
             { assertFalse(addProducto(carritoEmpty, "sdasd", 5)) },
             { assertFalse(addProducto(carritoEmpty, "Lapiz", 0)) }
