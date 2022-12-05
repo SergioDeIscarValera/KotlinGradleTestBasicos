@@ -3,62 +3,62 @@ package Objetos.FootBall
 import Objetos.FootBall.enums.TipoDenomination
 import Objetos.FootBall.models.Entrenador
 import Objetos.FootBall.models.Jugador
-import Objetos.FootBall.models.Seleccion
+import Objetos.FootBall.models.Selection
 
 public val COUNT_JUGADORES = 30
 
 fun main(){
-    val seleccion = Seleccion("", Array(COUNT_JUGADORES){null}, Entrenador("", 0))
-    seleccion.pais = inputString("Introduce el nombre del pais de la selección:")
-    seleccion.entrenador = Entrenador(inputString("Introduce el nombre del entrenador:"), inputNumber("Introduce los años de experiencia que tiene el entrenador:", 0..100))
+    val selection = Selection("", Array(COUNT_JUGADORES){null}, Entrenador("", 0))
+    selection.pais = inputString("Introduce el nombre del pais de la selección:")
+    selection.entrenador = Entrenador(inputString("Introduce el nombre del entrenador:"), inputNumber("Introduce los años de experiencia que tiene el entrenador:", 0..100))
     loopMain@do {
         when(menu()){
-            0 -> mostrarSeleccion(seleccion)
+            0 -> mostrarSeleccion(selection)
             1 -> {
-                if (seleccion.getJugadorById(inputNumber("Introduce el id del jugador a buscar:")) != null){
-                    println(seleccion.getJugadorById(inputNumber("Introduce el id del jugador a buscar:")))
+                if (selection.getJugadorById(inputNumber("Introduce el id del jugador a buscar:")) != null){
+                    println(selection.getJugadorById(inputNumber("Introduce el id del jugador a buscar:")))
                 }else println("No se ha encontrado")
             }
             2 -> {
-                for (i in seleccion.getJugadoresByDorsal(inputNumber("Introduce la dorsal a buscar:", 1..11))){
+                for (i in selection.getJugadoresByDorsal(inputNumber("Introduce la dorsal a buscar:", 1..11))){
                     if (i != null) println(i)
                 }
             }
             3 -> {
-                for (i in seleccion.getJugadoresByDenomination(inputDenomination("Introduce la denominación a buscar:"))){
+                for (i in selection.getJugadoresByDenomination(inputDenomination("Introduce la denominación a buscar:"))){
                     if (i != null) println(i)
                 }
             }
             4 -> {
-                if (seleccion.addJugador(inputJugadorValues("Introduce los datos para crear un nuevo jugador:")) != null){
+                if (selection.addJugador(inputJugadorValues("Introduce los datos para crear un nuevo jugador:")) != null){
                     println("El jugador se ha añadido correctamente")
                 }else println("El jugador no se ha añadido correctamente")
             }
             5 -> {
-                if (seleccion.updateJugadorById(
+                if (selection.updateJugadorById(
                         inputNumber("Introduce el id del jugador a actualizar:"),
                         inputJugadorValues("Introduce los datos para actualizar un nuevo jugador:")
                     ) != null){
                     println("Se ha actualizado correctamente")
                 } else println("No se ha actualizado correctamente")
             }
-            6 -> { if (seleccion.deleteJugadorById(inputNumber("Introduce el id del jugador a borrar:"))){
+            6 -> { if (selection.deleteJugadorById(inputNumber("Introduce el id del jugador a borrar:"))){
                 println("Se ha borrado correctamente")
             } else println("No se ha borrado correctamente")}
             else -> break@loopMain
         }
         Thread.sleep(1500)
-    }while (countJugadores(seleccion) < COUNT_JUGADORES)
+    }while (countJugadores(selection) < COUNT_JUGADORES)
 
-    mostrarSeleccion(seleccion)
+    mostrarSeleccion(selection)
 }
 
 // region Output
-private fun mostrarSeleccion(seleccion: Seleccion) {
+private fun mostrarSeleccion(selection: Selection) {
     clearConsole()
-    println("El pais de la selección es ${seleccion.pais}.")
-    println("El entrenador de la selección es ${seleccion.entrenador.nombre} y tiene ${seleccion.entrenador.experience} años de experiencia.")
-    for (i in seleccion.jugadores){
+    println("El pais de la selección es ${selection.pais}.")
+    println("El entrenador de la selección es ${selection.entrenador.nombre} y tiene ${selection.entrenador.experience} años de experiencia.")
+    for (i in selection.jugadores){
         if (i!=null){
             println(i)
             Thread.sleep(500)
@@ -165,9 +165,9 @@ fun inputString(message: String): String {
 
 // endregion
 
-fun countJugadores(seleccion: Seleccion): Int {
+fun countJugadores(selection: Selection): Int {
     var count = 0
-    for (i in seleccion.jugadores){
+    for (i in selection.jugadores){
         if (i != null) count++
     }
     return count
