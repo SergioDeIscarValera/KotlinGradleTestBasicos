@@ -15,6 +15,9 @@ data class Pokemon(val nombre: String, val tipo: Tipo, val subTipo: Tipo, val ca
         }
         return listMovimiento.toTypedArray()
     }
+    fun getMovimiento(index: Int): Movimiento?{
+        return movimientos[index]
+    }
     fun addMovimiento(movimiento: Movimiento): Movimiento?{
         for (i in this.movimientos.indices){
             if (this.movimientos[i] == null){
@@ -23,6 +26,16 @@ data class Pokemon(val nombre: String, val tipo: Tipo, val subTipo: Tipo, val ca
             }
         }
         return null
+    }
+    fun updateMovimiento(index: Int, movimiento: Movimiento): Movimiento?{
+        if (getMovimiento(index) == null) return null
+        movimientos[index] = movimiento
+        return movimiento
+    }
+    fun deleteMovimiento(index: Int): Boolean{
+        if (getMovimiento(index) == null) return false
+        movimientos[index] = null
+        return true
     }
 
     override fun toString(): String {

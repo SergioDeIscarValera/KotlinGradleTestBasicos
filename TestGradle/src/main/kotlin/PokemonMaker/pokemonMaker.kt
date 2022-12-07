@@ -5,21 +5,53 @@ import Objetos.FootBall.inputNumber
 import Objetos.FootBall.inputString
 import PokemonMaker.enums.Tipo
 import PokemonMaker.models.Características
+import PokemonMaker.models.Equipo
 import PokemonMaker.models.Movimiento
 import PokemonMaker.models.Pokemon
 
 fun main(){
-    val equipoPlayer = Array<Pokemon?>(6){ null }
-    val equipoEnemigo = Array<Pokemon?>((1..6).random()){ rdnPokemon() }
-
-    if (inputBoolean("¿Quieres que tu equipo sea aleatorio?")){
-        val rdn = (0..5).random()
-        for (i in 0..rdn){
-            equipoPlayer[i] = rdnPokemon()
+    val equipo = Equipo(inputString("Introduce tu nombre de entrenador:"))
+    do {
+        when(Menu()){
+            1 -> mostrarEquipo(equipo.nombreEntrenador, equipo.getPokemons())
+            2 -> {
+                val newPokemon = equipo.addPokemon(inputPokemon("Introduce los valores para el nuevo pokemon:"))
+                if (newPokemon == null) println("Error: fallo al añadir un pokemon, puede que su equipo este lleno.")
+                else println("Nuevo pokemon en el equipo:\n\t$newPokemon")
+            }
+            3 -> {
+                val newPokemon = equipo.updatePokemon(inputNumber("Introduce la posición en el equipo del pokemon a actualizar:", 1..6) -1, inputPokemon("Introduce los nuevos valores para el pokemon:"))
+                if (newPokemon == null) println("Error: fallo al actualizar compruebe que la posición introducida hay un pokemon.")
+                else println("Pokemon actualizado:\n\t$newPokemon")
+            }
+            4 -> {
+                if (!equipo.deletePokemon(inputNumber("Introduce la posición en el equipo del pokemon a eliminar:", 1..6) -1)) println("Error: fallo al eliminar compruebe que la posición introducida hay un pokemon.")
+                else println("Pokemon eliminado correctamente.")
+            }
+            5 -> {
+                val newMovimiento = equipo.getMovimientoPokemon(inputNumber("Introduce la posición en el equipo del pokemon:", 1..6) -1, inputNumber("Introduce la posición del movimiento:", 1..4) -1)
+                if (newMovimiento == null) println("Error: No se ha podido acceder o al pokemon o al movimiento")
+                else println(newMovimiento)
+            }
+            6 -> {
+                val newMovimiento = equipo.addMovimientoPokemon(inputNumber("Introduce la posición en el equipo del pokemon:", 1..6) -1, inputMovimiento("Introduce el nuevo movimiento:"))
+                if (newMovimiento == null) println("Error: No se ha podido añadir el movimiento")
+                else println(newMovimiento)
+            }
+            7 ->{
+                val newMovimiento = equipo.updateMovimientoPokemon(inputNumber("Introduce la posición en el equipo del pokemon:", 1..6) -1, inputNumber("Introduce la posición del movimiento a actualizar:", 1..4) -1, inputMovimiento("Introduce el nuevo movimiento:"))
+                if (newMovimiento == null) println("Error: no se ha podido actualizar el movimiento")
+                else println(newMovimiento)
+            }
+            8 ->{
+                if (!equipo.deleteMovimientoPokemon(inputNumber("Introduce la posición en el equipo del pokemon:", 1..6) -1, inputNumber("Introduce la posición del movimiento a eliminar:", 1..4) -1)) println("Error: No se ha podido eliminar el movimiento")
+                else println("Movimiento eliminado correctamente.")
+            }
+            else -> break
         }
-    }
-    mostrarEquipo("Jugador", equipoPlayer)
-    mostrarEquipo("Enemigo", equipoEnemigo)
+        Thread.sleep(1500)
+    }while (true)
+    mostrarEquipo(equipo.nombreEntrenador, equipo.getPokemons())
 }
 
 fun mostrarEquipo(nombre: String, equipo: Array<Pokemon?>) {
@@ -31,7 +63,14 @@ fun mostrarEquipo(nombre: String, equipo: Array<Pokemon?>) {
         }
     }
     println()
+    Thread.sleep(1500)
 }
+
+// region Menus
+private fun Menu(): Int{
+    return inputNumber("¿Qué quieres hacer?\n1 -> mostrar equipo\n2 -> añadir pokemon\n3 -> actualizar pokemon\n4 -> eliminar pokemon\n5 -> mostrar movimiento de un pokemon\n6 -> añadir movimiento a un pokemon\n7 -> actualizar movimiento a un pokemon\n8 -> eliminar movimiento de un pokemon\n9 -> salir",1..9)
+}
+// endregion
 
 // region Random
 private fun rdnPokemon(): Pokemon{
@@ -85,7 +124,7 @@ private fun inputMovimiento(message: String): Movimiento{
 
 // Tipo
 private fun inputTipo(message: String):Tipo{
-    clearConsole()
+    //clearConsole()
     println(message)
     println(Tipo.values().joinToString())
     var responseString: String
