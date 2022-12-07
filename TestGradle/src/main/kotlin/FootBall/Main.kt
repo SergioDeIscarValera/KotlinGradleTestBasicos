@@ -115,7 +115,7 @@ private fun menuGetJugador(): Int {
 // endregion
 
 // region Input
-private fun inputNumber(message: String, range: IntRange = -999..999): Int{
+fun inputNumber(message: String, range: IntRange = -999..999): Int{
     clearConsole()
     println(message)
     var response: Int?
@@ -173,7 +173,7 @@ fun countJugadores(selection: Selection): Int {
     return count
 }
 
-private fun clearConsole(count: Int = 30){
+fun clearConsole(count: Int = 30){
     for (i in 0..count){
         println()
     }
