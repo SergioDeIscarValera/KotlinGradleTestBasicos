@@ -6,6 +6,7 @@ Este proyecto tiene como fin practicar test en Kotlin usando JUnit. También se 
 ## Contenido Destacado:
 
 - [PokemonMaker CRUD](https://github.com/SergioDeIscarValera/KotlinGradleTestBasicos/tree/main/TestGradle/src/main/kotlin/PokemonMaker)
+    - [Test](https://github.com/SergioDeIscarValera/KotlinGradleTestBasicos/tree/main/TestGradle/src/test/kotlin/PokemonMaker)
 - [FootBall CRUD](https://github.com/SergioDeIscarValera/KotlinGradleTestBasicos/tree/main/TestGradle/src/main/kotlin/FootBall)
     - [Test](https://github.com/SergioDeIscarValera/KotlinGradleTestBasicos/tree/main/TestGradle/src/test/kotlin/FootBall)
 - [DAM-ZUM CRUD](https://github.com/SergioDeIscarValera/KotlinGradleTestBasicos/tree/main/TestGradle/src/main/kotlin/DAM_Zum)
