@@ -4,6 +4,14 @@ import PokemonMaker.enums.Tipo
 import java.lang.StringBuilder
 
 data class Pokemon(val nombre: String, val tipo: Tipo, val subTipo: Tipo, val características: Características){
+
+    constructor(nombre: String, tipo: Tipo, subTipo: Tipo, características: Características, movimientos: Array<Movimiento>): this(nombre, tipo, subTipo, características){
+        require(movimientos.size <= 4)
+        for (i in movimientos){
+            addMovimiento(i)
+        }
+    }
+
     private val movimientos = Array<Movimiento?>(4){ null }
 
     fun getMovimientos(): Array<Movimiento>{

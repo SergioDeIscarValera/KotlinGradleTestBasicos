@@ -1,6 +1,14 @@
 package PokemonMaker.models
 
 data class Equipo (val nombreEntrenador: String){
+
+    constructor(nombreEntrenador: String, pokemons: Array<Pokemon>): this(nombreEntrenador){
+        require(pokemons.size <= 6)
+        for (i in pokemons){
+            addPokemon(i)
+        }
+    }
+
     private val pokemons = Array<Pokemon?>(6){ null }
 
     fun getPokemons(): Array<Pokemon?>{

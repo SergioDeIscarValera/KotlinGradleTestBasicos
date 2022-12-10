@@ -20,31 +20,40 @@ fun main(){
                 else println("Nuevo pokemon en el equipo:\n\t$newPokemon")
             }
             3 -> {
-                val newPokemon = equipo.updatePokemon(inputNumber("Introduce la posición en el equipo del pokemon a actualizar:", 1..6) -1, inputPokemon("Introduce los nuevos valores para el pokemon:"))
+                val newPokemon = equipo.updatePokemon(inputNumber("Introduce la posición en el equipo del pokemon a actualizar:", 1..6) -1,
+                    inputPokemon("Introduce los nuevos valores para el pokemon:"))
                 if (newPokemon == null) println("Error: fallo al actualizar compruebe que la posición introducida hay un pokemon.")
                 else println("Pokemon actualizado:\n\t$newPokemon")
             }
             4 -> {
-                if (!equipo.deletePokemon(inputNumber("Introduce la posición en el equipo del pokemon a eliminar:", 1..6) -1)) println("Error: fallo al eliminar compruebe que la posición introducida hay un pokemon.")
+                if (!equipo.deletePokemon(inputNumber("Introduce la posición en el equipo del pokemon a eliminar:", 1..6) -1))
+                    println("Error: fallo al eliminar compruebe que la posición introducida hay un pokemon.")
                 else println("Pokemon eliminado correctamente.")
             }
             5 -> {
-                val newMovimiento = equipo.getMovimientoPokemon(inputNumber("Introduce la posición en el equipo del pokemon:", 1..6) -1, inputNumber("Introduce la posición del movimiento:", 1..4) -1)
+                val newMovimiento = equipo.getMovimientoPokemon(
+                    inputNumber("Introduce la posición en el equipo del pokemon:", 1..6) -1,
+                    inputNumber("Introduce la posición del movimiento:", 1..4) -1)
                 if (newMovimiento == null) println("Error: No se ha podido acceder o al pokemon o al movimiento")
                 else println(newMovimiento)
             }
             6 -> {
-                val newMovimiento = equipo.addMovimientoPokemon(inputNumber("Introduce la posición en el equipo del pokemon:", 1..6) -1, inputMovimiento("Introduce el nuevo movimiento:"))
+                val newMovimiento = equipo.addMovimientoPokemon(inputNumber("Introduce la posición en el equipo del pokemon:", 1..6) -1,
+                    inputMovimiento("Introduce el nuevo movimiento:"))
                 if (newMovimiento == null) println("Error: No se ha podido añadir el movimiento")
                 else println(newMovimiento)
             }
             7 ->{
-                val newMovimiento = equipo.updateMovimientoPokemon(inputNumber("Introduce la posición en el equipo del pokemon:", 1..6) -1, inputNumber("Introduce la posición del movimiento a actualizar:", 1..4) -1, inputMovimiento("Introduce el nuevo movimiento:"))
+                val newMovimiento = equipo.updateMovimientoPokemon(inputNumber("Introduce la posición en el equipo del pokemon:", 1..6) -1,
+                    inputNumber("Introduce la posición del movimiento a actualizar:", 1..4) -1,
+                    inputMovimiento("Introduce el nuevo movimiento:"))
                 if (newMovimiento == null) println("Error: no se ha podido actualizar el movimiento")
                 else println(newMovimiento)
             }
             8 ->{
-                if (!equipo.deleteMovimientoPokemon(inputNumber("Introduce la posición en el equipo del pokemon:", 1..6) -1, inputNumber("Introduce la posición del movimiento a eliminar:", 1..4) -1)) println("Error: No se ha podido eliminar el movimiento")
+                if (!equipo.deleteMovimientoPokemon(inputNumber("Introduce la posición en el equipo del pokemon:", 1..6) -1,
+                        inputNumber("Introduce la posición del movimiento a eliminar:", 1..4) -1))
+                    println("Error: No se ha podido eliminar el movimiento")
                 else println("Movimiento eliminado correctamente.")
             }
             else -> break
