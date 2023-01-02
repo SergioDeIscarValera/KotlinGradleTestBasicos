@@ -12,7 +12,7 @@ fun main(){
     val aparcamiento = Aparcamiento()
     do {
         when(menu()){
-            1 -> println("Hay un total de ${aparcamiento.getVehiculoCount()} vehículos aparcados")
+            1 -> println( "Hay un total de ${aparcamiento.getVehiculoCount()} vehículos aparcados" )
             2 -> outVehiculo(
                 aparcamiento.getVehiculo(inputMatricula("Introduce la matricula del coche a buscar:")),
                 "No hay ningún coche con esa matricula."
@@ -26,25 +26,38 @@ fun main(){
                 else println("El vehiculo no se ha encontrado.")
             }
             5 -> println("El conductor tiene un total de ${aparcamiento.getVehiculoConductor(inputConductor("Introduce los datos del conductor a buscar entre los coches:"))} coches aparcados")
-            6 -> {
-                val sortArray = aparcamiento.getVehiculoSort()
-                for (i in sortArray.indices){
-                    println("${i+1}->\t${sortArray[i]}")
-                }
-            }
+            6 -> mostrarVehiculos(aparcamiento.getVehiculoSort())
             7 -> println("En el momento actual el balance es de ${aparcamiento.getBalance()} €")
+            8 -> mostrarParcelas(aparcamiento.getCuadricula())
             else -> break
         }
         Thread.sleep(1500)
     }while (true)
 }
-// region Output
 
+// region Output
 fun outVehiculo(vehiculo: Vehiculo?, errorMessage: String){
     if (vehiculo != null) println(vehiculo)
     else println(errorMessage)
 }
+private fun mostrarVehiculos(vehiculos: Array<Vehiculo>) {
+    for (i in vehiculos.indices) {
+        println("${i + 1}->\t${vehiculos[i]}")
+    }
+}
 
+private fun mostrarParcelas(aparcamiento: Array<Array<Vehiculo?>>) {
+    for (i in aparcamiento) {
+        for (j in i) {
+            print(
+                if (j != null) {
+                    "\t|${j.matricula}|\t"
+                } else "\t\t| |\t\t"
+            )
+        }
+        println()
+    }
+}
 // endregion
 
 // region Input
@@ -122,6 +135,7 @@ fun menu(): Int{
             "5->\tCuantos coches tiene un conductor\n" +
             "6->\tCoches ordenados por antigüedad\n" +
             "7->\tRecaudación actual\n" +
-            "8->\tSalir", 1..8)
+            "8->\tVer plazas\n" +
+            "9->\tSalir", 1..9)
 }
 // endregion

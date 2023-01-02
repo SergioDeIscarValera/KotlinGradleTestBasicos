@@ -5,6 +5,8 @@ Este proyecto tiene como fin practicar test en Kotlin usando JUnit. También se 
 
 ## Contenido Destacado:
 
+- [Sala De Cine CRUD](https://github.com/SergioDeIscarValera/KotlinGradleTestBasicos/tree/main/TestGradle/src/main/kotlin/SalaDeCine)
+    - [Test](https://github.com/SergioDeIscarValera/KotlinGradleTestBasicos/tree/main/TestGradle/src/test/kotlin/SalaDeCine)
 - [PokemonMaker CRUD](https://github.com/SergioDeIscarValera/KotlinGradleTestBasicos/tree/main/TestGradle/src/main/kotlin/PokemonMaker)
     - [Test](https://github.com/SergioDeIscarValera/KotlinGradleTestBasicos/tree/main/TestGradle/src/test/kotlin/PokemonMaker)
 - [Aparcamiento CRUD](https://github.com/SergioDeIscarValera/KotlinGradleTestBasicos/tree/main/TestGradle/src/main/kotlin/Aparcamiento)

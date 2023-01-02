@@ -40,6 +40,8 @@ class Aparcamiento(){
         return count
     }
 
+    fun getCuadricula(): Array<Array<Vehiculo?>>{ return cuadricula }
+
     fun getVehiculo(matricula: String): Vehiculo?{
         for (i in cuadricula.indices){
             for (j in cuadricula[i].indices){
