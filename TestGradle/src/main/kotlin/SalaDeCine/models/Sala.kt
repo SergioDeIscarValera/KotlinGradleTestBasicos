@@ -2,29 +2,20 @@ package SalaDeCine.models
 
 import SalaDeCine.enums.ButacaEstado
 
-data class Sala(val nombre: String, val film: Film){
+data class Sala(val nombre: String, val film: Film, val size: Pair<Int, Int>){
 
-    private var butacas: Array<Array<Butaca>>? = null
-
-    /**
-     * Constructor secundario para indicar el tamaño de la sala
-     * @param size Par que indica la X -> fila y la Y -> columnas que va a tener la sala
-     */
-    constructor(nombre: String, film: Film, size: Pair<Int, Int>): this(nombre, film) {
-        this.butacas = Array(size.second){ Array(size.first){ Butaca(ButacaEstado.LIBRE) } }
-    }
+    private var butacas: Array<Array<Butaca>> = Array(size.second){ Array(size.first){ Butaca(ButacaEstado.LIBRE) } }
 
     /**
-     * Constructor secundario para indicar el tamaño de la sala y la probabilidad de que una butaca sea vip
+     * Constructor secundario para indicar la probabilidad de que una butaca sea vip
      * @param size Par que indica la X -> fila y la Y -> columnas que va a tener la sala
      * @param vipProbability Rango que marca la probabilidad de que una butaca sea vip, la escala va de 0-100
      */
-    constructor(nombre: String, film: Film, size: Pair<Int, Int>, vipProbability: Int): this(nombre, film) {
-        butacas = Array(size.second){ Array(size.first){ Butaca(ButacaEstado.LIBRE, vipProbability) } }
+    constructor(nombre: String, film: Film, size: Pair<Int, Int>, vipProbability: Int): this(nombre, film, size) {
+        butacas = Array(this.size.second){ Array(this.size.first){ Butaca(ButacaEstado.LIBRE, vipProbability) } }
     }
 
     fun mostrarSala(){
-        require( butacas != null)
         // region Información general
         println("Disposición en la sala ${this.nombre}:")
         println("Para la película ${film.titulo}:\n")
@@ -40,20 +31,20 @@ data class Sala(val nombre: String, val film: Film){
         // endregion
 
         // region Información en cuanto a números
-        println( "Esto da un total de:\n" + countEstadosText() )
+        println("Esto da un total de:\n" + countEstadosText())
         println("Y un balance total de ${balanceSala()} €.")
         // endregion
     }
 
     private fun mostrarButacas() {
-        for (i in butacas!!.indices.last downTo 0) {
+        for (i in butacas.indices.last downTo 0) {
             print("\t|  ${alphabetNumberToString(i)}  |\t")
-            for (j in butacas!![i].indices) {
+            for (j in butacas[i].indices) {
 
-                val vipMarc = if (butacas!![i][j].getIsVip()) '*' else ' '
+                val vipMarc = if (butacas[i][j].getIsVip()) '*' else ' '
 
                 print(
-                    when (butacas!![i][j].getEstado()) {
+                    when (butacas[i][j].getEstado()) {
                         ButacaEstado.RESERVADA -> "\t| $vipMarc R $vipMarc |\t"
                         ButacaEstado.OCUPADA -> "\t| $vipMarc O $vipMarc |\t"
                         else -> "\t| $vipMarc L $vipMarc |\t"
@@ -65,7 +56,7 @@ data class Sala(val nombre: String, val film: Film){
     }
 
     private fun mostrarIndices() {
-        for (i in butacas!![0].indices) {
+        for (i in butacas[0].indices) {
             print("\t|   ${i + 1}  |\t")
         }
     }
@@ -100,10 +91,9 @@ data class Sala(val nombre: String, val film: Film){
      * @param newEstado Es el nuevo estado de la butaca
      */
     private fun editButaca(pos: Pair<Int, Int>, estadoEqual: ButacaEstado, newEstado: ButacaEstado): Boolean{
-        if (butacas == null) return false
-        if(pos.second > butacas!!.lastIndex || pos.first > butacas!![0].lastIndex) return false
-        if (butacas!![pos.second][pos.first].getEstado() != estadoEqual) return false
-        butacas!![pos.second][pos.first].setEstado(newEstado)
+        if(pos.second > butacas.lastIndex || pos.first > butacas[0].lastIndex) return false
+        if (butacas[pos.second][pos.first].getEstado() != estadoEqual) return false
+        butacas[pos.second][pos.first].setEstado(newEstado)
         return true
     }
 
@@ -116,10 +106,9 @@ data class Sala(val nombre: String, val film: Film){
     }
 
     fun anularReserva(pos: Pair<Int, Int>): Boolean{
-        if (butacas == null) return false
-        if(pos.second > butacas!!.lastIndex || pos.first > butacas!![0].lastIndex) return false
-        if (butacas!![pos.second][pos.first].getEstado() == ButacaEstado.LIBRE) return false
-        butacas!![pos.second][pos.first].setEstado(ButacaEstado.LIBRE)
+        if(pos.second > butacas.lastIndex || pos.first > butacas[0].lastIndex) return false
+        if (butacas[pos.second][pos.first].getEstado() == ButacaEstado.LIBRE) return false
+        butacas[pos.second][pos.first].setEstado(ButacaEstado.LIBRE)
         return true
     }
 
@@ -133,7 +122,7 @@ data class Sala(val nombre: String, val film: Film){
 
     fun balanceSala(precioNormal: Float = 5.35f, precioVip: Float = 8.5f): Float{
         var count = 0f
-        for (i in butacas!!){
+        for (i in butacas){
             for (j in i){
                 if (j.getEstado() == ButacaEstado.OCUPADA) count += if (j.getIsVip()) precioVip else precioNormal
             }
@@ -143,7 +132,7 @@ data class Sala(val nombre: String, val film: Film){
 
     private fun countButacas(estado: ButacaEstado): Int {
         var count = 0
-        for (i in butacas!!){
+        for (i in butacas){
             for (j in i){
                 if (j.getEstado() == estado) count++
             }
@@ -151,8 +140,7 @@ data class Sala(val nombre: String, val film: Film){
         return count
     }
 
-    fun getSize(): Pair<Int, Int>{
-        require(butacas != null)
-        return Pair(butacas!![0].size, butacas!!.size)
+    internal fun getSize(): Pair<Int, Int> {
+        return Pair(butacas[0].size, butacas.size)
     }
 }
