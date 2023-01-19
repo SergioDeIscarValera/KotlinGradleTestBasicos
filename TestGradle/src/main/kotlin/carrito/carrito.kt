@@ -24,8 +24,8 @@ fun main(){
 }
 
 fun inputIndex(indices: IntRange): Int {
-    println("Introduce la posicion del carrito ha modificar:")
-    var response = -1
+    println("Introduce la posición del carrito ha modificar:")
+    var response: Int
     do {
         response = readln().toIntOrNull() ?: -1
         if (response in indices.first+1..indices.last+1) break else println("Valor no valido ha de estar entre")
@@ -37,13 +37,12 @@ fun inputIndex(indices: IntRange): Int {
 fun inputCantidad(): Int {
     println("Introduce la cantidad de producto que quieres:")
     println("| Min: 1 | MAX: 25 |")
-    val regex = Regex("""^\d(\d${'$'}|${'$'})""")
-    var response: String
+    var response: Int
     do {
-        response = readln()
-        if (regex.matches(response) && response.toInt() >= 1 && response.toInt() <= 25) break else println("Valor no valido")
+        response = readln().toIntOrNull() ?: -1
+        if (response in 1..25) break else println("Valor no valido")
     }while (true)
-    return response.toInt()
+    return response
 }
 
 fun inputProducto(): String {
@@ -88,20 +87,16 @@ fun mostrarCarrito(carrito: Array<Array<Any>>) {
 
 fun menu(): Int {
     println()
-    println("¿Qué hación quieres realizar?")
-    println("| mostrar | añadir / add | eliminar / rm | cambiar | salir / q |")
-    var response = -1
+    println("¿Qué acción quieres realizar?")
+    println("| mostrar | añadir / add | eliminar / rm | cambiar / ch | salir / q |")
+    val response: Int
     do {
-        val responseText = readln()
-        when(responseText){
-            "mostrar"   -> { response = 0; break }
-            "añadir"    -> { response = 1; break }
-            "add"       -> { response = 1; break }
-            "eliminar"  -> { response = 2; break }
-            "rm"        -> { response = 2; break }
-            "cambiar"   -> { response = 3; break }
-            "salir"     -> { response = 4; break }
-            "q"         -> { response = 4; break }
+        when(readln()){
+            "mostrar"-> { response = 0; break }
+            "añadir", "add"-> { response = 1; break }
+            "eliminar", "rm"-> { response = 2; break }
+            "cambiar", "ch"-> { response = 3; break }
+            "salir","q"-> { response = 4; break }
         }
         println("\nIntroduce un valor valido:")
         println("| mostrar | añadir / add | eliminar / rm | cambiar / ch | salir / q |")

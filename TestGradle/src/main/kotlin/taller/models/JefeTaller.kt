@@ -1,6 +1,7 @@
 package taller.models
 
 class JefeTaller(nombre: String, experiencia: Int): Persona(nombre, experiencia) {
+    override val salario: Int = 2500
     constructor(nombre: String, experiencia: Int, trabajadores: Array<Trabajador>): this(nombre, experiencia){
         require(trabajadores.size in 1..this.trabajadores.size)
         for (i in trabajadores){

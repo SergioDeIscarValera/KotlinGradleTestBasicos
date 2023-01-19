@@ -21,14 +21,7 @@ data class Sala(val nombre: String, val film: Film, val size: Pair<Int, Int>){
         println("Para la película ${film.titulo}:\n")
         // endregion
 
-        //region Mapa de la sala
-        print("\t|     |\t")
-        mostrarIndices()
-
-        println()
-
         mostrarButacas()
-        // endregion
 
         // region Información en cuanto a números
         println("Esto da un total de:\n" + countEstadosText())
@@ -36,7 +29,9 @@ data class Sala(val nombre: String, val film: Film, val size: Pair<Int, Int>){
         // endregion
     }
 
-    private fun mostrarButacas() {
+    fun mostrarButacas() {
+        mostrarIndices()
+        println()
         for (i in butacas.indices.last downTo 0) {
             print("\t|  ${alphabetNumberToString(i)}  |\t")
             for (j in butacas[i].indices) {
@@ -56,6 +51,7 @@ data class Sala(val nombre: String, val film: Film, val size: Pair<Int, Int>){
     }
 
     private fun mostrarIndices() {
+        print("\t|     |\t")
         for (i in butacas[0].indices) {
             print("\t|   ${i + 1}  |\t")
         }

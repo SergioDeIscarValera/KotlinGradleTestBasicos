@@ -1,15 +1,10 @@
 package SalaDeCine
 
-import SalaDeCine.enums.ButacaEstado
 import SalaDeCine.enums.FilmGenero
-import SalaDeCine.models.Film
-import SalaDeCine.models.Sala
+import SalaDeCine.models.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
-import kotlin.test.assertContentEquals
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 private class CineEditorTEST {
     // region Others

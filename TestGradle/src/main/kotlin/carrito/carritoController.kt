@@ -3,7 +3,7 @@ package carrito
 import kotlin.math.roundToInt
 
 // Esto con una clase se haría mucho mejor
-val productosNombres = arrayOf("Lapiz", "Manzana", "Ratón")
+val productosNombres = arrayOf("Lápiz", "Manzana", "Ratón")
 val productosPrecio = arrayOf(0.25, 1.0, 2.5)
 val productosIva = arrayOf(0, 1, 2)
 
@@ -42,7 +42,7 @@ fun cambiarProducto(carrito: Array<Array<Any>>, index: Int, newNombre: String, c
     return true
 }
 
-// Retorna el index buscando en las lista de productos
+// Retorna el index buscando en la lista de productos
 fun productoIndex(nombre: String): Int {
     for (i in productosNombres.indices){
         if (productosNombres[i] == nombre) return i
@@ -58,7 +58,7 @@ fun carritoLastIndex(carrito: Array<Array<Any>>): Int {
     return -1
 }
 
-// Retorna si el producto esta en la lista de productos
+// Retorna si el producto está en la lista de productos
 fun productoValido(nombre: String): Boolean {
     for (i in productosNombres){
         if (i == nombre){

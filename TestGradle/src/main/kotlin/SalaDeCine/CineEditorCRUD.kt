@@ -12,11 +12,11 @@ fun main(){
         clear()
         when (menu()) {
             1 -> sala.mostrarSala()
-            2 -> mostrarResultado(sala.reservaButaca(inputPos("Introduce la posición donde quieres hacer la reserva", sizeSala)),
+            2 -> mostrarResultado(sala.reservaButaca(inputPos("Introduce la posición donde quieres hacer la reserva", sizeSala, sala)),
                 "La butaca se a reservado correctamente.", "Error: No se ha podido reservar la butaca.")
-            3 -> mostrarResultado(sala.formalizarReserva(inputPos("Introduce la posición donde quieres formalizar la reserva", sizeSala)),
+            3 -> mostrarResultado(sala.formalizarReserva(inputPos("Introduce la posición donde quieres formalizar la reserva", sizeSala, sala)),
                 "Se ha formalizado la reserva correctamente.", "Error: No se ha podido formalizar la reserva.")
-            4 -> mostrarResultado(sala.anularReserva(inputPos("Introduce la posición donde quieres anular la reserva", sizeSala)),
+            4 -> mostrarResultado(sala.anularReserva(inputPos("Introduce la posición donde quieres anular la reserva", sizeSala, sala)),
                 "La reserva se ha anulado correctamente.", "Error: No se ha podido anular la reserva.")
             5 -> println("El resumen del estado de la sala es el siguiente:\n" + sala.countEstadosText())
             6 -> println("El balance de la sala es de ${sala.balanceSala()}€.")
@@ -49,7 +49,7 @@ private fun setInitialValuesSala() = Sala(
 private fun menu(): Int{
     val message = "¿Qué quieres hacer con la sala ahora?\n" +
             "1 -> Mostrar estado de la sala\n" +
-            "2 -> Reservar butaca/s\n" +
+            "2 -> Reservar butaca\n" +
             "3 -> Formalizar reserva\n" +
             "4 -> Anular reserva\n" +
             "5 -> Número de butacas libres, reservadas y ocupadas\n" +
@@ -118,7 +118,8 @@ private fun inputString(message: String): String {
     return response
 }
 
-private fun inputPos(message: String, size: Pair<Int,Int>): Pair<Int,Int>{
+private fun inputPos(message: String, size: Pair<Int,Int>, sala: Sala? = null): Pair<Int,Int>{
+    sala?.mostrarButacas()
     var responseSplit: List<String>
     do {
         val response = inputString(message)

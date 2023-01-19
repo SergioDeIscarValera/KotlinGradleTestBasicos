@@ -8,40 +8,44 @@ import factura.models.ItemFactura
 import factura.models.Producto
 import java.time.LocalDate
 import kotlinx.coroutines.*
-import java.io.BufferedReader
-import java.io.InputStreamReader
 
 fun main() = runBlocking {
     val productos = Array((1..15).random()){ Producto("name", 1f, 1) }
     ProductoFactory.getInstance().createProductoRandom(productos)
-    println(mostrarProductos(productos))
 
     val nombreUsuario = inputString("Introduce el nombre del propietario de la compra:")
 
-    //Coroutine
-    val simMercado = launch {
-        simularMercado(productos, 1000)
-    }
+    //Coroutine para simular el cambio de precio
+    val simMercado = simularMercado(productos, 1000)
 
-    val factura = Factura(nombreUsuario, LocalDate.now())
-
-    /*do {
-        when(menu()){
-            1 -> {
-                println(factura)
-                delay(2500)
+    // Lo hago así para que al hacer un readln no pare la ejecución de la coroutine que simula el mercado
+    runBlocking {
+        val factura = Factura(nombreUsuario, LocalDate.now())
+        do {
+            when(menu()){
+                1 -> { println(factura); delay(4000) }
+                2 -> addItemAlCarro(factura, productos)
+                3 -> factura.deleteItem(
+                    inputNumber("Introduce la posición del carrito donde quieres eliminar:",
+                        1..20) -1)
+                4 -> {
+                    val producto = inputProducto(productos)
+                    factura.updateItem(
+                        inputNumber("Introduce la posición del carrito donde quieres eliminar:",
+                            1..20) -1,
+                        ItemFactura(producto ?: continue, inputNumber("Introduce la cantidad de producto que quieres comprar: ", 1..producto.stock)))
+                }
+                5 -> factura.findItem(
+                    inputNumber("Introduce la posición del carrito donde quieres eliminar:",
+                        1..20) -1)
+                6 -> { println(mostrarProductos(productos)); delay(4000) }
+                else -> break
             }
-            2 -> async {addItemAlCarro(factura, productos)}.await()
-            3 -> println()//factura.deleteItem()
-            4 -> println()//factura.updateItem()
-            5 -> println()//factura.findItem()
-            else -> break
-        }
-    }while (true)*/
+        }while (true)
+        simMercado.cancelAndJoin()
 
-    println(factura)
-
-    simMercado.join()
+        println(factura)
+    }
 }
 private fun addItemAlCarro(factura: Factura, opciones: Array<Producto>){
     val producto = inputProducto(opciones)
@@ -107,16 +111,18 @@ private fun printError(error: String){
     Thread.sleep(1500)
 }
 
-suspend fun simularMercado(productos: Array<Producto>, delay: Long = 5000, interactions: Int = 10) {
-    var count:Long = 0
-    val maxCount = delay * interactions
+/**
+ * Coroutine que se encarga de simular el cambio de precio aleatorio de los productos
+ * @param productos Productos que se van ha estar actualizando
+ * @param delay Espacio de tiempo entre actualización y actualización
+ * @see Producto
+ * @see Factura
+ */
+fun simularMercado(productos: Array<Producto>, delay: Long = 5000) = GlobalScope.launch{
     do {
         delay(delay)
         for (i in productos.indices){
             productos[i].SetPrecio(ProductoFactory.getInstance().getPrecioRandom())
         }
-        println("\n***El precio a cambiado***\n")
-        count += delay
-        println("Count = $count/${maxCount}")
-    }while (true/*count < maxCount*/)
+    }while (true)
 }

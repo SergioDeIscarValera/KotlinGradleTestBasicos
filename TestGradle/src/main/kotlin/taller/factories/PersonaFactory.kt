@@ -38,7 +38,7 @@ class PersonaFactory{
                 else ->25
             }
             //+1 por el Jefe
-            if (countTrabajadores + count + 1 > 50) countTrabajadores = (countTrabajadores + count) -1 -50
+            if (countTrabajadores + count + 1 > 50) countTrabajadores = countTrabajadores + count -1 -50
 
             val jefe = JefeTaller(randomNombre(), experiencia, countTrabajadores)
             for (i in 0 until countTrabajadores){
