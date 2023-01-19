@@ -31,7 +31,7 @@ fun main(){
     println("---------------------")
 }
 
-fun calculateNomina(personas: Array<Persona?>): Int {
+private fun calculateNomina(personas: Array<Persona?>): Int {
     var total = 0
     for (i in personas){
         total += i?.salario ?: 0
@@ -40,7 +40,7 @@ fun calculateNomina(personas: Array<Persona?>): Int {
 }
 
 // Muy parecido a C#
-inline fun <reified Type : Persona> countType(personas: Array<Persona?>): Int {
+private inline fun <reified Type : Persona> countType(personas: Array<Persona?>): Int {
     var count = 0
     for (i in personas){
         if (i is Type) count++
@@ -48,7 +48,7 @@ inline fun <reified Type : Persona> countType(personas: Array<Persona?>): Int {
     return count
 }
 
-inline fun <reified Type : Persona> findFirstType(personas: Array<Persona?>): Persona? {
+private inline fun <reified Type : Persona> findFirstType(personas: Array<Persona?>): Persona? {
     for (i in personas.indices){
         if (personas[i] is Type)
             return personas[i]
