@@ -4,6 +4,7 @@ Este proyecto tiene como fin practicar test en Kotlin usando JUnit. También se 
 ---
 
 ## Contenido Destacado:
+- [The Clone Wars](https://github.com/SergioDeIscarValera/KotlinGradleTestBasicos/tree/main/TestGradle/src/main/kotlin/clone_wars) (03h:12s)
 - [Sala De Cine CRUD](https://github.com/SergioDeIscarValera/KotlinGradleTestBasicos/tree/main/TestGradle/src/main/kotlin/SalaDeCine)
     - [Test](https://github.com/SergioDeIscarValera/KotlinGradleTestBasicos/tree/main/TestGradle/src/test/kotlin/SalaDeCine)
 - [Taller](https://github.com/SergioDeIscarValera/KotlinGradleTestBasicos/tree/main/TestGradle/src/main/kotlin/taller)
