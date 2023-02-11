@@ -6,4 +6,5 @@ interface IPila<T> {
     fun peek(): T?
     fun indices(): IntRange
     fun isEmpty(): Boolean
+    fun unpacking()
 }

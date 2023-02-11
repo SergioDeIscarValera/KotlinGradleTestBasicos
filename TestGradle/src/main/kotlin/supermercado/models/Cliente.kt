@@ -25,4 +25,11 @@ class Cliente(private val productos: MutableList<Producto> = mutableListOf()): I
     override fun isEmpty(): Boolean {
         return productos.isEmpty()
     }
+
+    override fun unpacking() {
+        if (productos.isEmpty()) return
+        for (i in productos.indices) {
+            println(pop())
+        }
+    }
 }
