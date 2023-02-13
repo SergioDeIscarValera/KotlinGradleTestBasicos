@@ -4,6 +4,8 @@ Este proyecto tiene como fin practicar test en Kotlin usando JUnit. También se 
 ---
 
 ## Contenido Destacado:
+- [Parking Colecciones Y MockK](https://github.com/SergioDeIscarValera/KotlinGradleTestBasicos/tree/main/TestGradle/src/main/kotlin/parkingv2)
+    - [Test](https://github.com/SergioDeIscarValera/KotlinGradleTestBasicos/tree/main/TestGradle/src/test/kotlin/parkingv2)
 - [The Clone Wars](https://github.com/SergioDeIscarValera/KotlinGradleTestBasicos/tree/main/TestGradle/src/main/kotlin/clone_wars) (03h:12s)
 - [Clase Genericos Y MockK](https://github.com/SergioDeIscarValera/KotlinGradleTestBasicos/tree/main/TestGradle/src/main/kotlin/clase_gen)
     - [Test](https://github.com/SergioDeIscarValera/KotlinGradleTestBasicos/tree/main/TestGradle/src/test/kotlin/clase_gen)
