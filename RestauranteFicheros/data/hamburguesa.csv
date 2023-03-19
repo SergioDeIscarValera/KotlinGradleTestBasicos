@@ -1,0 +1,11 @@
+id,nombre,precio,ingredientes
+0,Grande,4.7407618,0;Tomate;4.7407618
+1,Pequeña,5.073849,1;Tomate;5.073849
+2,Mediana,16.581816,2;Lechuga;4.5529294|3;Lechuga;4.8124404|4;Cebolla;6.898967|5;Tomate;0.31748068
+3,Pequeña,3.0373683,6;Lechuga;3.0373683
+4,Pequeña,9.402831,7;Tomate;2.3057454|8;Lechuga;7.097086
+5,Mediana,3.3947682,9;Lechuga;1.7937915|10;Cebolla;1.6009767
+6,Mediana,23.830433,11;Lechuga;6.4170294|12;Cebolla;8.987169|13;Cebolla;8.426233
+7,Grande,12.8813,14;Lechuga;6.870504|15;Tomate;6.0107965
+8,Pequeña,19.523283,16;Lechuga;2.355731|17;Cebolla;9.173021|18;Tomate;7.994531
+9,Pequeña,11.776251,19;Lechuga;2.9018016|20;Lechuga;8.87445
