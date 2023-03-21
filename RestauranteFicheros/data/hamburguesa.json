@@ -1,0 +1,155 @@
+[
+	{
+		"id": 0,
+		"nombre": "Grande",
+		"ingredientes": [
+			{
+				"id": 0,
+				"nombre": "Lechuga",
+				"precio": 2.6397142
+			},
+			{
+				"id": 1,
+				"nombre": "Tomate",
+				"precio": 9.169565
+			},
+			{
+				"id": 2,
+				"nombre": "Cebolla",
+				"precio": 0.8976013
+			}
+		]
+	},
+	{
+		"id": 1,
+		"nombre": "Pequeña",
+		"ingredientes": [
+			{
+				"id": 3,
+				"nombre": "Lechuga",
+				"precio": 3.2471244
+			}
+		]
+	},
+	{
+		"id": 2,
+		"nombre": "Pequeña",
+		"ingredientes": [
+			{
+				"id": 4,
+				"nombre": "Tomate",
+				"precio": 4.263525
+			},
+			{
+				"id": 5,
+				"nombre": "Tomate",
+				"precio": 0.9272083
+			},
+			{
+				"id": 6,
+				"nombre": "Cebolla",
+				"precio": 9.046139
+			},
+			{
+				"id": 7,
+				"nombre": "Lechuga",
+				"precio": 0.740266
+			}
+		]
+	},
+	{
+		"id": 3,
+		"nombre": "Mediana",
+		"ingredientes": [
+			{
+				"id": 8,
+				"nombre": "Cebolla",
+				"precio": 5.3029394
+			},
+			{
+				"id": 9,
+				"nombre": "Tomate",
+				"precio": 5.5969563
+			},
+			{
+				"id": 10,
+				"nombre": "Lechuga",
+				"precio": 7.715607
+			},
+			{
+				"id": 11,
+				"nombre": "Cebolla",
+				"precio": 4.3220243
+			},
+			{
+				"id": 12,
+				"nombre": "Cebolla",
+				"precio": 4.504685
+			}
+		]
+	},
+	{
+		"id": 4,
+		"nombre": "Mediana",
+		"ingredientes": [
+			{
+				"id": 13,
+				"nombre": "Tomate",
+				"precio": 7.5789843
+			},
+			{
+				"id": 14,
+				"nombre": "Cebolla",
+				"precio": 3.9377165
+			}
+		]
+	},
+	{
+		"id": 5,
+		"nombre": "Mediana",
+		"ingredientes": [
+			{
+				"id": 15,
+				"nombre": "Lechuga",
+				"precio": 10.681155
+			},
+			{
+				"id": 16,
+				"nombre": "Tomate",
+				"precio": 5.9599233
+			}
+		]
+	},
+	{
+		"id": 6,
+		"nombre": "Pequeña",
+		"ingredientes": [
+			{
+				"id": 17,
+				"nombre": "Lechuga",
+				"precio": 10.972876
+			}
+		]
+	},
+	{
+		"id": 7,
+		"nombre": "Pequeña",
+		"ingredientes": [
+			{
+				"id": 18,
+				"nombre": "Cebolla",
+				"precio": 2.3491473
+			},
+			{
+				"id": 19,
+				"nombre": "Tomate",
+				"precio": 5.545294
+			},
+			{
+				"id": 20,
+				"nombre": "Lechuga",
+				"precio": 2.6080306
+			}
+		]
+	}
+]

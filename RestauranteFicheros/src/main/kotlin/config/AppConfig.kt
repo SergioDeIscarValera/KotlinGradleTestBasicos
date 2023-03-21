@@ -16,7 +16,6 @@ object AppConfig {
     lateinit var APP_AUTHOR: String
     lateinit var APP_DATA: String
 
-
     init {
         loadProperties()
         initStorage()

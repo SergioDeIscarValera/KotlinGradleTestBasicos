@@ -3,10 +3,7 @@ import controller.HamburguesaController
 import factories.HamburguesaFactory
 import models.Hamburguesa
 import repository.hamburguesa.HamburguesaRepositoryMap
-import services.storage.hamburguesa.HamburguesaFileAleatorio
-import services.storage.hamburguesa.HamburguesaFileBinario
-import services.storage.hamburguesa.HamburguesaFileCSV
-import services.storage.hamburguesa.HamburguesaFileSerializable
+import services.storage.hamburguesa.*
 
 fun main(args: Array<String>){
     println("APP_NAME: ${AppConfig.APP_NAME}")
@@ -31,6 +28,11 @@ fun main(args: Array<String>){
             HamburguesaFileAleatorio
         )
     )
+    val hamburguesaControllerJson = HamburguesaController(
+        HamburguesaRepositoryMap(
+            HamburguesaFileJson
+        )
+    )
 
     val hamburgesasRdn = mutableListOf<Hamburguesa>()
 
@@ -42,6 +44,7 @@ fun main(args: Array<String>){
     hamburguesaControllerCsv.saveAll(hamburgesasRdn)
     hamburguesaControllerBin.saveAll(hamburgesasRdn)
     hamburguesaControllerAleatorio.saveAll(hamburgesasRdn)
+    hamburguesaControllerJson.saveAll(hamburgesasRdn)
 
     println("Hamburguesas guardadas en el controlador serializable:")
     hamburguesaControllerSeria.getAll().forEach { println(it) }
@@ -49,11 +52,16 @@ fun main(args: Array<String>){
     hamburguesaControllerCsv.getAll().forEach { println(it) }
     println("Hamburguesas guardadas en el controlador binario:")
     hamburguesaControllerBin.getAll().forEach { println(it) }
+    println("Hamburguesas guardadas en el controlador aleatorio:")
+    hamburguesaControllerAleatorio.getAll().forEach { println(it) }
+    println("Hamburguesas guardadas en el controlador json:")
+    hamburguesaControllerJson.getAll().forEach { println(it) }
     println("Los controladores tienen la misma info: " +
         (
             hamburguesaControllerSeria.getAll() == hamburguesaControllerCsv.getAll() &&
             hamburguesaControllerCsv.getAll() == hamburguesaControllerBin.getAll() &&
-            hamburguesaControllerBin.getAll() == hamburguesaControllerAleatorio.getAll()
+            hamburguesaControllerBin.getAll() == hamburguesaControllerAleatorio.getAll() &&
+            hamburguesaControllerAleatorio.getAll() == hamburguesaControllerJson.getAll()
         )
     )
 }

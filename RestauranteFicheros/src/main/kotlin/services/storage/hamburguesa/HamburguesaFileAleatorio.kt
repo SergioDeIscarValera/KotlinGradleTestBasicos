@@ -11,6 +11,7 @@ private val logger = KotlinLogging.logger {}
 
 object HamburguesaFileAleatorio: HamburguesaStorageService {
     private val localFile = "${AppConfig.APP_DATA}${File.separator}hamburguesa.dat"
+    private var lastRecordPosition: Long = 0L
 
     override fun saveAll(elements: List<Hamburguesa>): List<Hamburguesa> {
         logger.debug { "HamburguesaFileAleatorio ->\tsaveAll: ${elements.joinToString("\t")}" }
@@ -31,21 +32,23 @@ object HamburguesaFileAleatorio: HamburguesaStorageService {
             }
         }
 
+        lastRecordPosition = fileRdn.filePointer
+
         return elements
     }
 
     override fun loadAll(): List<Hamburguesa> {
         logger.debug { "HamburguesaFileAleatorio ->\tloadAll" }
 
-        val fileRdn = RandomAccessFile(localFile, "rw")
-
         val file = File(localFile)
         if (!file.exists() || !file.canRead()) return emptyList()
         if (file.length() == 0L) return emptyList()
 
         val hamburguesas = mutableListOf<Hamburguesa>()
+        val fileRdn = RandomAccessFile(localFile, "r")
+        fileRdn.seek(0)
 
-        while (fileRdn.filePointer < fileRdn.length()) {
+        while (fileRdn.filePointer < lastRecordPosition) {
             val id = fileRdn.readInt()
             val nombre = fileRdn.readUTF()
             val size = fileRdn.readInt()
@@ -65,6 +68,7 @@ object HamburguesaFileAleatorio: HamburguesaStorageService {
             hamburguesas.add(Hamburguesa(id, nombre, ingredientes))
         }
 
+        fileRdn.close()
         return hamburguesas.toList()
     }
 }

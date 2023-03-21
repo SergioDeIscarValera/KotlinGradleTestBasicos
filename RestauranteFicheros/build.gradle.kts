@@ -16,6 +16,11 @@ dependencies {
     // Log
     implementation("ch.qos.logback:logback-classic:1.4.5")
     implementation("io.github.microutils:kotlin-logging-jvm:3.0.4")
+
+    //Moshi
+    implementation("com.squareup.moshi:moshi:1.14.0")
+    implementation("com.squareup.moshi:moshi-adapters:1.14.0")
+    implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
 }
 
 tasks.test {
