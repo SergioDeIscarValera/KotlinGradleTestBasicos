@@ -3,10 +3,8 @@ package models
 import locate.toLocalMoney
 import java.io.Serializable
 
-class Ingrediente(val id: Int = count++, val nombre: String, val precio: Float): Serializable {
-    companion object{
-        var count = 0
-    }
+class Ingrediente(val id: Int, val nombre: String, val precio: Float): Serializable {
+    fun toDto() = dto.IngredienteDto(id.toString(), nombre, precio.toLocalMoney())
 
     override fun toString(): String {
         return "Ingrediente ($id) -> Nombre: $nombre ; Precio: ${precio.toLocalMoney()}"

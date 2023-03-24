@@ -4,6 +4,8 @@ import config.AppConfig
 import models.Hamburguesa
 import models.Ingrediente
 import mu.KotlinLogging
+import validator.canReed
+import validator.canWrite
 import java.io.File
 
 private val logger = KotlinLogging.logger {}
@@ -15,13 +17,13 @@ object HamburguesaFileCSV: HamburguesaStorageService {
         logger.debug { "HamburguesaFileCSV ->\tsaveAll: ${elements.joinToString("\t")}" }
 
         val file = File(localFile)
-        if (file.exists() && !file.canRead()) return emptyList()
+        if (!canWrite(file)) return emptyList()
 
         // Encabezado
         file.writeText("id,nombre,precio,ingredientes\n")
 
         elements.forEach {
-            file.appendText("${it.id},${it.nombre},${it.precioTotal},${fromIngredientesToCsvRow(it.ingredientes)}\n")
+            file.appendText("${it.id},${it.nombre},${it.precio},${fromIngredientesToCsvRow(it.ingredientes)}\n")
         }
 
         return elements
@@ -37,7 +39,7 @@ object HamburguesaFileCSV: HamburguesaStorageService {
         logger.debug { "HamburguesaFileCSV ->\tloadAll" }
 
         val file = File(localFile)
-        if (!file.exists() || !file.canRead()) return emptyList()
+        if(!canReed(file)) return emptyList()
 
         // Lee el fichero completo
         return file.readLines()

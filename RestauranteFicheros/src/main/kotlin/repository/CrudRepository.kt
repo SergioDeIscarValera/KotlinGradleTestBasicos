@@ -8,7 +8,4 @@ interface CrudRepository<T, ID> {
     fun deleteById(id: ID): T?
     fun update(element: T): T?
     fun updateById(id: ID, element: T): T?
-
-    fun upgrade(): List<T>
-    fun downgrade(): List<T>
 }

@@ -4,6 +4,8 @@ import config.AppConfig
 import models.Hamburguesa
 import models.Ingrediente
 import mu.KotlinLogging
+import validator.canReed
+import validator.canWrite
 import java.io.File
 import java.io.RandomAccessFile
 
@@ -17,7 +19,7 @@ object HamburguesaFileAleatorio: HamburguesaStorageService {
         logger.debug { "HamburguesaFileAleatorio ->\tsaveAll: ${elements.joinToString("\t")}" }
 
         val file = File(localFile)
-        if (file.exists() && !file.canRead()) return emptyList()
+        if (!canWrite(file)) return emptyList()
 
         val fileRdn = RandomAccessFile(localFile, "rw")
 
@@ -41,8 +43,7 @@ object HamburguesaFileAleatorio: HamburguesaStorageService {
         logger.debug { "HamburguesaFileAleatorio ->\tloadAll" }
 
         val file = File(localFile)
-        if (!file.exists() || !file.canRead()) return emptyList()
-        if (file.length() == 0L) return emptyList()
+        if (!canWrite(file) || file.length() == 0L) return emptyList()
 
         val hamburguesas = mutableListOf<Hamburguesa>()
         val fileRdn = RandomAccessFile(localFile, "r")

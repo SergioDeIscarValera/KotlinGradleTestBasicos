@@ -8,7 +8,7 @@ private val logger = KotlinLogging.logger {}
 
 class HamburguesaRepositoryMap(
     private val storageService: HamburguesaStorageService
-): HamburguesaRepository {
+): HamburguesaRepositoryExternalStore {
     private val almacen = mutableMapOf<Int, Hamburguesa>()
 
     override fun getAllOrderByPrecio(): List<Hamburguesa> {
@@ -16,7 +16,7 @@ class HamburguesaRepositoryMap(
 
         upgrade()
 
-        return almacen.values.sortedBy { it.precioTotal }
+        return almacen.values.sortedBy { it.precio }
     }
 
     override fun findByNombre(nombre: String): Hamburguesa? {

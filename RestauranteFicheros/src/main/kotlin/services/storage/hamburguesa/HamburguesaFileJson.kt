@@ -8,26 +8,30 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import config.AppConfig
 import models.Hamburguesa
 import mu.KotlinLogging
+import validator.canReed
+import validator.canWrite
 import java.io.File
 import java.io.Serializable
 
 private val logger = KotlinLogging.logger {}
 
+@ExperimentalStdlibApi
 object HamburguesaFileJson: HamburguesaStorageService{
 
-    val localFile = "${AppConfig.APP_DATA}${File.separator}hamburguesa.json"
+    private val localFile = "${AppConfig.APP_DATA}${File.separator}hamburguesa.json"
 
     override fun saveAll(elements: List<Hamburguesa>): List<Hamburguesa> {
         logger.debug { "HamburguesaFileJson ->\tsaveAll: ${elements.joinToString("\t")}" }
 
         val file = File(localFile)
-        if (file.exists() && !file.canRead()) return emptyList()
+        if (!canWrite(file)) return emptyList()
 
         val moshi: Moshi = Moshi.Builder()
             .add(KotlinJsonAdapterFactory())
             .build()
-        val jsonAdapter: JsonAdapter<List<Hamburguesa>> =
-            moshi.adapter(Types.newParameterizedType(List::class.java, Hamburguesa::class.java))
+       /* val jsonAdapter: JsonAdapter<List<Hamburguesa>> =
+            moshi.adapter(Types.newParameterizedType(List::class.java, Hamburguesa::class.java))*/
+        val jsonAdapter = moshi.adapter<List<Hamburguesa>>()
         val json: String = jsonAdapter.indent("\t").toJson(elements)
 
         file.writeText(json)
@@ -39,7 +43,7 @@ object HamburguesaFileJson: HamburguesaStorageService{
         logger.debug { "HamburguesaFileJson ->\tloadAll" }
 
         val file = File(localFile)
-        if (!file.exists() || !file.canRead()) return emptyList()
+        if (!canReed(file)) return emptyList()
 
         val moshi: Moshi = Moshi.Builder()
             .add(KotlinJsonAdapterFactory())

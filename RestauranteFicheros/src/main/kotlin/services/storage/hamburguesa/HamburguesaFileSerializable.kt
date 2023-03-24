@@ -3,6 +3,8 @@ package services.storage.hamburguesa
 import config.AppConfig
 import models.Hamburguesa
 import mu.KotlinLogging
+import validator.canReed
+import validator.canWrite
 import java.io.*
 
 private val logger = KotlinLogging.logger {}
@@ -13,7 +15,7 @@ object HamburguesaFileSerializable: HamburguesaStorageService {
     override fun saveAll(elements: List<Hamburguesa>): List<Hamburguesa> {
         logger.debug { "HamburguesaFileSerializable ->\tsaveAll: ${elements.joinToString("\t")}" }
         val file = File(localFile)
-        if (file.exists() && !file.canRead()) return emptyList()
+        if (!canWrite(file)) return emptyList()
 
         val output = ObjectOutputStream(FileOutputStream(file))
         output.use {
@@ -26,7 +28,7 @@ object HamburguesaFileSerializable: HamburguesaStorageService {
     override fun loadAll(): List<Hamburguesa> {
         logger.debug { "HamburguesaFileSerializable ->\tloadAll" }
         val file = File(localFile)
-        if (!file.exists() || !file.canRead()) return emptyList()
+        if (!canReed(file)) return emptyList()
 
         val hamburguesas = ObjectInputStream(FileInputStream(file)).use {
             it.readObject() as MutableList<Hamburguesa>

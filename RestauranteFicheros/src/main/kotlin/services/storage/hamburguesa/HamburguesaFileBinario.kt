@@ -5,6 +5,8 @@ import factories.IngredienteFactory
 import models.Hamburguesa
 import models.Ingrediente
 import mu.KotlinLogging
+import validator.canReed
+import validator.canWrite
 import java.io.BufferedInputStream
 import java.io.File
 
@@ -16,7 +18,7 @@ object HamburguesaFileBinario: HamburguesaStorageService {
     override fun saveAll(elements: List<Hamburguesa>): List<Hamburguesa> {
         logger.debug { "HamburguesaFileBinario ->\tsaveAll: ${elements.joinToString("\t")}" }
         val file = File(localFile)
-        if (file.exists() && !file.canRead()) return emptyList()
+        if (!canWrite(file)) return emptyList()
 
         file.outputStream().buffered().use {
             elements.forEach{ element ->
@@ -39,7 +41,7 @@ object HamburguesaFileBinario: HamburguesaStorageService {
     override fun loadAll(): List<Hamburguesa> {
         logger.debug { "HamburguesaFileBinario ->\tloadAll" }
         val file = File(localFile)
-        if (!file.exists() || !file.canRead()) return emptyList()
+        if(!canReed(file)) return emptyList()
 
         val hamburguesas = mutableListOf<Hamburguesa>()
         file.inputStream().buffered().use {

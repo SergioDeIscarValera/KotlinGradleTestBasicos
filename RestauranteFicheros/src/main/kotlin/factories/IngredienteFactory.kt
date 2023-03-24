@@ -4,6 +4,8 @@ import models.Ingrediente
 import kotlin.random.Random
 
 object IngredienteFactory {
+    private var nextId = 0
+
     fun getRdnIngredientes(): List<Ingrediente>{
         val ingredientes = mutableListOf<Ingrediente>()
         repeat((1..5).random()){
@@ -14,16 +16,9 @@ object IngredienteFactory {
 
     fun getRdnIngrediente(): Ingrediente{
         return Ingrediente(
-            nombre = getRdnNombre(),
-            precio = getRdnPrecio()
+            id = nextId++,
+            nombre = getRdnNombre(arrayOf("Tomate", "Lechuga", "Cebolla")),
+            precio = getRdnPrecio(1..10)
         )
-    }
-
-    private fun getRdnNombre(): String{
-        return arrayOf("Tomate", "Lechuga", "Cebolla").random()
-    }
-
-    private fun getRdnPrecio(): Float{
-        return (0..10).random() + Random.nextFloat()
     }
 }
