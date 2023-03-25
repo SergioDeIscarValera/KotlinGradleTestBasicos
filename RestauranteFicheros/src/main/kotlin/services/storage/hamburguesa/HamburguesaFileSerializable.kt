@@ -17,8 +17,7 @@ object HamburguesaFileSerializable: HamburguesaStorageService {
         val file = File(localFile)
         if (!canWrite(file)) return emptyList()
 
-        val output = ObjectOutputStream(FileOutputStream(file))
-        output.use {
+        val output = ObjectOutputStream(FileOutputStream(file)).use {
             it.writeObject(elements)
         }
 

@@ -4,6 +4,7 @@ import controller.PedidoController
 import controller.ProductoController
 import factories.HamburguesaFactory
 import factories.ProductoFactory
+import locate.toLocalMoney
 import models.Hamburguesa
 import models.Pedido
 import models.Producto
@@ -19,8 +20,8 @@ import services.storage.productos.ProductoFileJson
 
 fun main(args: Array<String>){
     println("APP_NAME: ${AppConfig.APP_NAME}")
-    //hamburguesasTest()
-    pedidosTest()
+    hamburguesasTest()
+    //pedidosTest()
 }
 
 @OptIn(ExperimentalStdlibApi::class)
@@ -130,4 +131,15 @@ private fun hamburguesasTest(){
                             hamburguesaControllerAleatorio.getAll() == hamburguesaControllerJson.getAll()
                     )
     )
+
+
+    //Requisitos
+    println("Hamburguesa mas cara:")
+    hamburguesaControllerSeria.getHamburguesaMasCara()?.let { println(it) }
+    println("Hamburguesa con mas ingredientes:")
+    hamburguesaControllerCsv.getHamburguesaConMasIngredientes()?.let { println(it) }
+    println("Precio medio:")
+    println(hamburguesaControllerJson.getPrecioMedio().toLocalMoney())
+    println("Precio medio de ingredientes:")
+    hamburguesaControllerAleatorio.getPrecioMedioIngredientes().mapValues { it.value.toLocalMoney() }.let { println(it) }
 }

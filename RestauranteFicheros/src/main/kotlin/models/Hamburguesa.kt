@@ -4,8 +4,11 @@ import dto.ProductoDto
 import locate.toLocalMoney
 import java.io.Serializable
 
-class Hamburguesa(id: Int, nombre: String, val ingredientes: List<Ingrediente>)
-    : Producto(
+class Hamburguesa(
+    id: Int,
+    nombre: String,
+    val ingredientes: List<Ingrediente> = emptyList()
+): Producto(
         id,
         nombre,
         ingredientes.map { it.precio }.sum()

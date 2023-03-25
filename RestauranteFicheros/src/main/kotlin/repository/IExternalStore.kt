@@ -1,6 +1,6 @@
 package repository
 
-interface IExternalStore<T, ID> {
+interface IExternalStore<T> {
     fun upgrade(): List<T>
     fun downgrade(): List<T>
 }

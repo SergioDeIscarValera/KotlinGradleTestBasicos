@@ -27,6 +27,41 @@ class HamburguesaRepositoryMap(
         return almacen.values.find { it.nombre.lowercase() == nombre.lowercase() }
     }
 
+    override fun getHamburguesaMasCara(): Hamburguesa? {
+        logger.debug { "Repositorio ->\tgetHamburguesaMasCara" }
+
+        upgrade()
+
+        return almacen.values.maxByOrNull { it.precio }
+    }
+
+    override fun getHamburguesaConMasIngredientes(): Hamburguesa? {
+        logger.debug { "Repositorio ->\tgetHamburguesaConMasIngredientes" }
+
+        upgrade()
+
+        return almacen.values.maxByOrNull { it.ingredientes.size }
+    }
+
+    override fun getPrecioMedio(): Double {
+        logger.debug { "Repositorio ->\tgetPrecioMedio" }
+
+        upgrade()
+
+        return almacen.values.map { it.precio }.average()
+    }
+
+    override fun getPrecioMedioIngredientes(): Map<String, Double> {
+        logger.debug { "Repositorio ->\tgetPrecioMedioIngredientes" }
+
+        upgrade()
+
+        return almacen.values
+            .flatMap { it.ingredientes }
+            .groupBy { it.nombre }
+            .mapValues { it.value.map { it.precio }.average() }
+    }
+
     override fun getAll(): List<Hamburguesa> {
         logger.debug { "Repositorio ->\tfindAll" }
 

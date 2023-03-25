@@ -21,6 +21,26 @@ class HamburguesaController(
         return repo.findByNombre(nombre)
     }
 
+    override fun getHamburguesaMasCara(): Hamburguesa? {
+        logger.debug { "Controller ->\tgetHamburguesaMasCara" }
+        return repo.getHamburguesaMasCara()
+    }
+
+    override fun getHamburguesaConMasIngredientes(): Hamburguesa? {
+        logger.debug { "Controller ->\tgetHamburguesaConMasIngredientes" }
+        return repo.getHamburguesaConMasIngredientes()
+    }
+
+    override fun getPrecioMedio(): Double {
+        logger.debug { "Controller ->\tgetPrecioMedio" }
+        return repo.getPrecioMedio()
+    }
+
+    override fun getPrecioMedioIngredientes(): Map<String, Double> {
+        logger.debug { "Controller ->\tgetPrecioMedioIngredientes" }
+        return repo.getPrecioMedioIngredientes()
+    }
+
     override fun getAll(): List<Hamburguesa> {
         return repo.getAll()
     }

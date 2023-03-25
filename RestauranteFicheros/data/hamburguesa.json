@@ -1,12 +1,22 @@
 [
 	{
 		"id": 0,
-		"nombre": "Pequeña",
+		"nombre": "Grande",
 		"ingredientes": [
 			{
 				"id": 0,
 				"nombre": "Lechuga",
-				"precio": 10.504236
+				"precio": 7.8755026
+			},
+			{
+				"id": 1,
+				"nombre": "Lechuga",
+				"precio": 4.555249
+			},
+			{
+				"id": 2,
+				"nombre": "Tomate",
+				"precio": 7.5319977
 			}
 		]
 	},
@@ -15,9 +25,14 @@
 		"nombre": "Pequeña",
 		"ingredientes": [
 			{
-				"id": 1,
+				"id": 3,
 				"nombre": "Lechuga",
-				"precio": 2.0779016
+				"precio": 9.530056
+			},
+			{
+				"id": 4,
+				"nombre": "Tomate",
+				"precio": 9.182914
 			}
 		]
 	},
@@ -26,29 +41,14 @@
 		"nombre": "Mediana",
 		"ingredientes": [
 			{
-				"id": 2,
-				"nombre": "Lechuga",
-				"precio": 8.904451
-			},
-			{
-				"id": 3,
-				"nombre": "Cebolla",
-				"precio": 7.3424497
-			},
-			{
-				"id": 4,
-				"nombre": "Tomate",
-				"precio": 3.3148403
-			},
-			{
 				"id": 5,
-				"nombre": "Lechuga",
-				"precio": 6.660574
+				"nombre": "Tomate",
+				"precio": 2.638269
 			},
 			{
 				"id": 6,
-				"nombre": "Cebolla",
-				"precio": 2.1908479
+				"nombre": "Lechuga",
+				"precio": 6.8404565
 			}
 		]
 	},
@@ -58,39 +58,39 @@
 		"ingredientes": [
 			{
 				"id": 7,
+				"nombre": "Tomate",
+				"precio": 2.3861184
+			},
+			{
+				"id": 8,
 				"nombre": "Lechuga",
-				"precio": 4.163431
+				"precio": 4.451248
+			},
+			{
+				"id": 9,
+				"nombre": "Cebolla",
+				"precio": 2.0911565
 			}
 		]
 	},
 	{
 		"id": 4,
-		"nombre": "Mediana",
+		"nombre": "Pequeña",
 		"ingredientes": [
 			{
-				"id": 8,
-				"nombre": "Lechuga",
-				"precio": 7.459676
-			},
-			{
-				"id": 9,
-				"nombre": "Lechuga",
-				"precio": 3.3517237
-			},
-			{
 				"id": 10,
-				"nombre": "Cebolla",
-				"precio": 8.714659
+				"nombre": "Tomate",
+				"precio": 1.1714725
 			},
 			{
 				"id": 11,
-				"nombre": "Lechuga",
-				"precio": 5.1330304
+				"nombre": "Cebolla",
+				"precio": 7.818097
 			},
 			{
 				"id": 12,
 				"nombre": "Tomate",
-				"precio": 8.040612
+				"precio": 3.462936
 			}
 		]
 	},
@@ -101,48 +101,38 @@
 			{
 				"id": 13,
 				"nombre": "Tomate",
-				"precio": 7.6573067
-			},
-			{
-				"id": 14,
-				"nombre": "Lechuga",
-				"precio": 10.932155
-			},
-			{
-				"id": 15,
-				"nombre": "Lechuga",
-				"precio": 8.961908
-			},
-			{
-				"id": 16,
-				"nombre": "Lechuga",
-				"precio": 2.4996896
+				"precio": 10.7129965
 			}
 		]
 	},
 	{
 		"id": 6,
-		"nombre": "Mediana",
+		"nombre": "Grande",
 		"ingredientes": [
 			{
-				"id": 17,
+				"id": 14,
+				"nombre": "Lechuga",
+				"precio": 3.4652247
+			},
+			{
+				"id": 15,
+				"nombre": "Lechuga",
+				"precio": 10.78212
+			},
+			{
+				"id": 16,
 				"nombre": "Cebolla",
-				"precio": 8.290444
+				"precio": 10.13595
+			},
+			{
+				"id": 17,
+				"nombre": "Lechuga",
+				"precio": 9.848732
 			},
 			{
 				"id": 18,
-				"nombre": "Tomate",
-				"precio": 6.6246
-			},
-			{
-				"id": 19,
-				"nombre": "Tomate",
-				"precio": 6.6815114
-			},
-			{
-				"id": 20,
-				"nombre": "Tomate",
-				"precio": 1.9955051
+				"nombre": "Cebolla",
+				"precio": 10.176037
 			}
 		]
 	}
