@@ -1,13 +1,39 @@
 import controllers.AccidenteController
 import repositories.accidente.AccidenteRepositoryMap
 import services.storage.accidente.AccidenteFileCsv
+import services.storage.accidente.AccidenteFileJson
+import services.storage.accidente.AccidenteFileXml
 
+@ExperimentalStdlibApi
 fun main() {
-    val controller = AccidenteController(
+    val controllerCsv = AccidenteController(
         AccidenteRepositoryMap(
             AccidenteFileCsv
         )
     )
+    val controllerJson = AccidenteController(
+        AccidenteRepositoryMap(
+            AccidenteFileJson
+        )
+    )
+    val controllerXml = AccidenteController(
+        AccidenteRepositoryMap(
+            AccidenteFileXml
+        )
+    )
+
+    val csv = controllerCsv.getAll()
+    val csvMitad = csv.subList(0, 500) // Tarda mucho en escribirse en el fichero
+
+    controllerJson.saveAll(csvMitad)
+    controllerXml.saveAll(csvMitad)
+
+    println("Tienen el mismo contenido: ${controllerJson.getAll().containsAll(controllerXml.getAll())}")
+    step()
+    consultas(controllerCsv)
+}
+
+private fun consultas(controller: AccidenteController) {
     println("Accidentes con alcohol o drogas:")
     controller.getAccidentesAlcoholOrDrogas().forEach { println(it) }
     step()
@@ -15,15 +41,15 @@ fun main() {
     println(controller.getNumeroAccidentesAlcoholAndDrogas())
     step()
     println("Accidentes agrupados por sexo:")
-    controller.getAccidentesAgrupadosPorSexo().forEach { println(it) }
+    controller.getAccidentesAgrupadosPorSexo().mapValues { it.value.size }.forEach { println(it) }
     step()
     println("Accidentes agrupados por mes:")
-    controller.getAccidentesAgrupadosPorMes().forEach { println(it) }
+    controller.getAccidentesAgrupadosPorMes().mapValues { it.value.size }.forEach { println(it) }
     step()
     println("Accidentes agrupados por vehiculo:")
-    controller.getAccidentesAgrupadosPorVehiculo().forEach { println(it) }
+    controller.getAccidentesAgrupadosPorVehiculo().mapValues { it.value.size }.forEach { println(it) }
     step()
-    println("Accidentes en la calle Leganes:")
+    println("Accidentes en la calle Leganés:")
     controller.getAccidentesEnLaCalleLeganes().forEach { println(it) }
     step()
     println("Numero de accidentes por distrito:")
@@ -58,7 +84,8 @@ fun main() {
     step()
 }
 
-private fun step() {
+private fun step(time: Long = 5_00L) {
     println("====================================")
-    Thread.sleep(1000)
+    repeat(5){ println() }
+    Thread.sleep(time)
 }

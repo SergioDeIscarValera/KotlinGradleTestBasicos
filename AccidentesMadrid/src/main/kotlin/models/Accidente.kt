@@ -4,7 +4,10 @@ import dto.AccidenteDto
 import enums.TipoClima
 import enums.TipoPersona
 import enums.TipoSexo
+import formateadores.toFormatTime
+import java.io.Serializable
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 data class Accidente(
     val numExpediente: String,
@@ -25,10 +28,11 @@ data class Accidente(
     val coordenadas: Coordenadas,
     val alcochol: Boolean,
     val drogas: Boolean,
-){
+): Serializable{
     fun toDto() = AccidenteDto(
         numExpediente = numExpediente,
-        fechaYHora = fechaYHora.toString(),
+        fecha = fechaYHora.toLocalDate().toString(),
+        hora = fechaYHora.toLocalTime().toFormatTime(),
         localizacion = localizacion,
         numero = numero,
         codDistrito = codDistrito.toString(),
@@ -41,7 +45,8 @@ data class Accidente(
         sexo = sexo.toString(),
         codLesividad = codLesividad.toString(),
         lesividad = lesividad ?: "NULL",
-        coordenadas = coordenadas.toDto,
+        coordenadaX = coordenadas.cordenadaX.toString(),
+        coordenadaY = coordenadas.cordenadaY.toString(),
         alcochol = alcochol.toString(),
         drogas = drogas.toString(),
     )

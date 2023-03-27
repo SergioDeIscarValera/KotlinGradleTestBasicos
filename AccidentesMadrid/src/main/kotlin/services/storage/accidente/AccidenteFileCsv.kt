@@ -4,10 +4,7 @@ import config.AppConfig
 import enums.TipoClima
 import enums.TipoPersona
 import enums.TipoSexo
-import formateadores.toClima
-import formateadores.toFechaYHora
-import formateadores.toPersona
-import formateadores.toSexo
+import formateadores.*
 import models.Accidente
 import models.Coordenadas
 import mu.KotlinLogging
@@ -20,7 +17,7 @@ private val logger = KotlinLogging.logger {}
 object AccidenteFileCsv: AccidenteStorageService {
 
     override fun saveAll(elements: List<Accidente>): List<Accidente> {
-        logger.debug { "AccidenteFileCsv ->\tsaveAll: ${elements.joinToString("\t")}" }
+        logger.debug { "AccidenteFileCsv ->\tsaveAll" }
         // Por ahora no se va a guardar nada en el fichero
         return elements
     }
@@ -36,7 +33,12 @@ object AccidenteFileCsv: AccidenteStorageService {
             // saltar la primera línea
             if (it.startsWith("num")) return@forEachLine
 
-            val row = it.split(";")
+            val row = it.split(";").toMutableList()
+            if (row.size > 19){ // Hay una línea con un ; en medio de un comentario
+                //Juntar las columnas 4 y 5
+                row[3] = "${row[3]};${row[4]}"
+                row.removeAt(4)
+            }
             accidentes.add(
                 Accidente(
                     numExpediente = row[0],
@@ -54,8 +56,8 @@ object AccidenteFileCsv: AccidenteStorageService {
                     codLesividad = row[13].toIntOrNull() ?: -1,
                     lesividad = row[14],
                     coordenadas = Coordenadas(
-                        row[15].replace(",",".").toDoubleOrNull(),
-                        row[16].replace(",",".").toDoubleOrNull()
+                        row[15].toCoordenada(),
+                        row[16].toCoordenada()
                     ),
                     alcochol = row[17] == "S",
                     drogas = row[18] == "1",

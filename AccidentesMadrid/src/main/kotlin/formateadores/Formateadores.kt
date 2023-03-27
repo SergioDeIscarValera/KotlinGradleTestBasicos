@@ -4,6 +4,8 @@ import enums.TipoClima
 import enums.TipoPersona
 import enums.TipoSexo
 import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 
 fun String.toFechaYHora(hora: String): LocalDateTime {
     val fechaSplit = this.split("/").reversed().joinToString("-")
@@ -15,6 +17,10 @@ fun String.toFechaYHora(hora: String): LocalDateTime {
             "${horaSplit[0]}:${horaSplit[1]}:${horaSplit[2]}"
         }
     return LocalDateTime.parse("${fechaSplit}T$horaEdit")
+}
+
+fun LocalTime.toFormatTime(): String{
+    return this.format(DateTimeFormatter.ofPattern("HH:mm:ss"))
 }
 
 fun String.toClima(): TipoClima {
@@ -43,4 +49,11 @@ fun String.toSexo(): TipoSexo{
         "mujer" -> TipoSexo.MUJER
         else -> TipoSexo.DESCONOCIDO // Null y desconocidos
     }
+}
+
+fun String.toCoordenada(): Double?{
+    return this
+        .replace("\"", "")
+        .replace(',', '.')
+        .toDoubleOrNull()
 }

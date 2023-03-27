@@ -1,13 +1,8 @@
 package models
 
-import dto.CoordenadasDto
+import java.io.Serializable
 
 data class Coordenadas(
     val cordenadaX: Double?,
     val cordenadaY: Double?,
-) {
-    val toDto = CoordenadasDto(
-        cordenadaX = cordenadaX.toString(),
-        cordenadaY = cordenadaY.toString(),
-    )
-}
+): Serializable

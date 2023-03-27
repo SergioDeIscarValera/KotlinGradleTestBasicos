@@ -102,14 +102,14 @@ class AccidenteController(
         return repo.getById(id)
     }
 
-    override fun save(element: Accidente): Accidente {
+    override fun save(element: Accidente, storage: Boolean): Accidente {
         logger.debug { "AccidenteController ->\tsave" }
-        return repo.save(element)
+        return repo.save(element, storage)
     }
 
-    override fun saveAll(elements: List<Accidente>) {
+    override fun saveAll(elements: List<Accidente>, storage: Boolean) {
         logger.debug { "AccidenteController ->\tsaveAll" }
-        repo.saveAll(elements)
+        repo.saveAll(elements, storage)
     }
 
     override fun deleteById(id: String): Accidente? {

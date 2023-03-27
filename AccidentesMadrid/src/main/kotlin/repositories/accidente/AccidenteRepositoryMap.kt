@@ -66,7 +66,7 @@ class AccidenteRepositoryMap(
         logger.debug { "AccidenteRepositoryMap ->\tgetAccidentesFindeNoche" }
         upgrade()
         return accidentes.values.filter {
-            it.fechaYHora.hour in 20 downTo 6 &&
+            it.fechaYHora.hour !in 6..20 &&
             it.fechaYHora.dayOfWeek.value !in 1..5
         }
     }
@@ -129,22 +129,22 @@ class AccidenteRepositoryMap(
         return accidentes[id]
     }
 
-    override fun save(element: Accidente): Accidente {
+    override fun save(element: Accidente, storage: Boolean): Accidente {
         logger.debug { "AccidenteRepositoryMap ->\tsave" }
-        upgrade()
+        //upgrade()
         accidentes[element.numExpediente] = element
-        downgrade()
+        if (storage) downgrade()
         return element
     }
 
-    override fun saveAll(elements: List<Accidente>) {
+    override fun saveAll(elements: List<Accidente>, storage: Boolean) {
         logger.debug { "AccidenteRepositoryMap ->\tsaveAll" }
-        elements.forEach { accidentes[it.numExpediente] = it }
+        elements.forEach { save(it, storage) }
     }
 
     override fun deleteById(id: String): Accidente? {
         logger.debug { "AccidenteRepositoryMap ->\tdeleteById" }
-        upgrade()
+        //upgrade()
         val result = accidentes.remove(id)
         downgrade()
         return result
@@ -167,7 +167,7 @@ class AccidenteRepositoryMap(
         logger.debug { "AccidenteRepositoryMap ->\tupgrade" }
         accidentes.clear()
         val load = storageService.loadAll()
-        saveAll(load)
+        saveAll(load, false)
         return load
     }
 
